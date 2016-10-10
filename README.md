@@ -1,1 +1,3 @@
 # Assignment5Group1
+
+If you know a vehicle’s speed and the amount of time it has traveled, you calculate the distance traveled as follows:Distance = Speed x TimeCreate an application that allows the user to enter the vehicle’s speed and the number of hours traveled into textboxes.When the user clicks the Calculate button, the application should use a loop to update a ListBoxcontrol with the distance the vehicle has traveled for each hour of that time period. That is, if the user enters Time = 3, then there should be three entries in the ListBox, for distance traveled after hour 1, after hour 2, and after hour 3.Also write the data to a file. For each time the user clicks the calculate button, first put the speed and time entered, then put each line from the ListBox
