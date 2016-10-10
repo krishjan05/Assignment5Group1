@@ -1,48 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System;
+using System.Collections.ObjectModel;
+using System.IO;
 
 namespace Assignment5Group1
 {
     class VM : INotifyPropertyChanged
     {
-        int _speed;
-        int _time;
-        List<int> _myList = new List<int>();
-
-        public int Speed
+        const string DIRNAME = "PROG8010";
+        const string FILENAME = "hour_distance.txt";
+        public string Speed
         {
             get { return _speed; }
             set { _speed = value; OnPropertyChanged(); }
         }
+        string _speed;
 
-        public int Time
+        public string Time
         {
             get { return _time; }
             set { _time = value;  OnPropertyChanged(); }
         }
+        string _time;
 
-        public List<int> MyList
+        public ObservableCollection<Data> MyList
         {
             get { return _myList; }
             set { _myList = value;  OnPropertyChanged(); }
         }
+        ObservableCollection<Data> _myList = new ObservableCollection<Data>();
 
         public void CalcDistance()
         {
-            for (int i =1; i <= _time; i++)
+            int hours = int.Parse(_time);
+            int speed = int.Parse(_speed);
+            _myList.Clear();
+            int i = 1;
+            while (i <= hours){
+                Data d = new Data();
+                d.hour = i;
+                d.distance = i * speed;
+                _myList.Add(d);
+                i++;
+            }            
+        }
+        public void SaveToFile()
+        {
+            string path = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string fullpath = Path.Combine(path, DIRNAME);
+            Directory.CreateDirectory(fullpath);
+            string fullname = Path.Combine(fullpath, FILENAME);
+            StreamWriter sw = File.AppendText(fullname);
+            foreach(Data d in MyList)
             {
-                _myList.Add(_speed * i);
+                sw.Write(" ");
+                sw.WriteLine(d.ToString());
             }
+            sw.Close();
         }
         #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName]string caller = null)
+        private void OnPropertyChanged([CallerMemberName]string caller = "")
         {
             // make sure only to call this if the value actually changes
 

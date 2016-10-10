@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment5Group1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="525">
+        Title="MainWindow" Height="450" Width="450" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -19,28 +19,42 @@
         </Grid.RowDefinitions>
         <Label Name="lblSpeed"
                Grid.Column="0" Grid.Row="0" 
-               Margin="20"
-               Content="Enter Speed of Vehicle:"/>
+               Margin="10"
+               Content="Enter Speed of Vehicle:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Label Name="lblTime"
                Grid.Column="0" Grid.Row="1" 
-               Margin="20"
-               Content="Enter Time for which vehicle was running:"/>
+               Margin="10"
+               Content="Enter Time:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Button Name="btnCalculateDistance"
-                Grid.Column="0" Grid.Row="2"
-                Margin="20"
+                Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"
+                Margin="10"
                 Content="Calculate"
                 Click="btnCalculateDistance_Click" />
         <TextBox Name="txtSpeed"
                 Grid.Column="1" Grid.Row="0" 
-                Margin="20"
-                Text="{Binding Speed, Mode=TwoWay}"/>
+                Margin="10"
+                Text="{Binding Speed}" VerticalAlignment="Center"/>
         <TextBox Name="txtTime"
                 Grid.Column="1" Grid.Row="1" 
-                Margin="20"
-                Text="{Binding Time, Mode=TwoWay}"/>
-        <ListBox Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"
-                 Margin="20"
-                 ItemsSource="{Binding MyList, Mode=TwoWay}"/>
-
+                Margin="10"
+                Text="{Binding Time}" VerticalAlignment="Center"/>
+        <ListBox
+            ItemsSource="{Binding MyList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"
+            FontSize="12"
+            Margin="10" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="{Binding hour}" />
+                        <Label Grid.Column="1" Content="{Binding distance}" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

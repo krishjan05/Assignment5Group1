@@ -13,25 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Assignment5Group1
+namespace WpfApplication1
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        VM vm;
         public MainWindow()
         {
             InitializeComponent();
-            vm = new VM();
-            DataContext = vm;
-        }
-
-        private void btnCalculateDistance_Click(object sender, RoutedEventArgs e)
-        {
-            vm.CalcDistance();
-            vm.SaveToFile();
         }
     }
 }
